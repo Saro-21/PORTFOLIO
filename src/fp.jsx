@@ -890,7 +890,7 @@ function Contact() {
     const e = validate(); if (Object.keys(e).length) { setErrors(e); return; }
     setStatus("TX");
     try {
-      const res = await fetch("http://localhost:4000/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

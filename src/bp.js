@@ -480,6 +480,17 @@ app.get("/api/portfolio", (req, res) => {
 });
 
 
+/* ── SERVE STATIC FRONTEND (PRODUCTION) ── */
+const distPath = path.join(__dirname, "..", "dist");
+app.use(express.static(distPath));
+
+app.use((req, res, next) => {
+  if (req.method === "GET" && !req.path.startsWith("/api/")) {
+    return res.sendFile(path.join(distPath, "index.html"));
+  }
+  next();
+});
+
 /* ── 404 ── */
 app.use((req, res) => {
   res.status(404).json({
